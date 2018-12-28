@@ -15,7 +15,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        button.setTitle("Tap me 3 times!", for: UIControlState())
+        button.setTitle("Tap me 3 times!", for: UIControl.State())
     }
 
     @IBAction func buttonDidTouch(_ sender: UIButton) {
