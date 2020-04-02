@@ -43,12 +43,18 @@ open class Ecno {
     fileprivate static var sessionStartTime: Date!
     fileprivate static var timestampsDictionary = TimestampsDictionary(rootKey: Constants.timestampsRootKey)
     fileprivate static var toDoSet = ToDoSet(rootKey: Constants.toDoRootKey)
+    
+    private static var _userDefaults: UserDefaults?
+    public static var userDefaults: UserDefaults {
+        return _userDefaults ?? .standard
+    }
 
     /**
      Initializer method. It must be called before start using any Ecno method.
      */
-    public static func initialize() {
-        let userDefaults = UserDefaults.standard
+    public static func initialize(name: String = "com.xmartlabs.Ecno") {
+        _userDefaults = UserDefaults(suiteName: name)
+        
         let currentAppVersion = appVersion()
         let userDefaultsAppVersion = userDefaults.string(forKey: Constants.appVersionKey)
         if currentAppVersion != userDefaultsAppVersion {

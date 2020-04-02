@@ -32,7 +32,7 @@ class EcnoTests: XCTestCase {
 
     func testSeenTagImmediately() {
         Ecno.markDone(task)
-        print(UserDefaults.standard.dictionaryRepresentation())
+        print(Ecno.userDefaults.dictionaryRepresentation())
         XCTAssert(Ecno.beenDone(task, scope: .appSession))
         XCTAssert(Ecno.beenDone(task, scope: .appInstall))
         XCTAssert(Ecno.beenDone(task, scope: .since(1.minutes)))
@@ -59,8 +59,10 @@ class EcnoTests: XCTestCase {
     }
 
     func simulateAppUpdate() {
-        UserDefaults.standard.set("another_version", forKey: Ecno.Constants.appVersionKey)
-        Ecno.initialize()
+        let name = "com.xmartlabs.Ecno"
+        let userDefaults = UserDefaults(suiteName: name) ?? .standard
+        userDefaults.set("another_version", forKey: Ecno.Constants.appVersionKey)
+        Ecno.initialize(name: name)
     }
 
     func testSeenTagAfterAppUpdate() {

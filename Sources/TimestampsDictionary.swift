@@ -32,15 +32,15 @@ class TimestampsDictionary {
     fileprivate let rootKey: String
     fileprivate var dictionary: [String: [String: AnyObject]] {
         get {
-            guard let dict = UserDefaults.standard.dictionary(forKey: rootKey) as? [String: [String: AnyObject]] else {
+            guard let dict = Ecno.userDefaults.dictionary(forKey: rootKey) as? [String: [String: AnyObject]] else {
                 let dict = [String: [String: AnyObject]]()
-                UserDefaults.standard.set(dict, forKey: rootKey)
+                Ecno.userDefaults.set(dict, forKey: rootKey)
                 return dict
             }
             return dict
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: rootKey)
+            Ecno.userDefaults.set(newValue, forKey: rootKey)
         }
     }
 
@@ -65,7 +65,7 @@ class TimestampsDictionary {
     }
 
     func clear() {
-        UserDefaults.standard.removeObject(forKey: rootKey)
+        Ecno.userDefaults.removeObject(forKey: rootKey)
     }
 
 }
